@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.javatuples.Pair;
 
 public class DataParser {
 	private ArrayList<Node> nodeList;
@@ -57,7 +58,7 @@ public class DataParser {
 		            verticies.add(Integer.parseInt(stringV[i])); 
 				// add node to list
 				tempTuple = new Pair(name, verticies);
-				connectList.add(tempTuple);
+				catList.add(tempTuple);
 			};	
 			input.close();
 
@@ -98,7 +99,7 @@ public class DataParser {
 	public void setCategories(ArrayList<Pair<String, ArrayList<Integer>>> categories) {
 		for (int i = 0; i < categories.size(); i++) {
 			String name = categories.get(i).getValue0();
-			for (int j = 0; j < categories.get(i).getValue1().length; j++) {
+			for (int j = 0; j < categories.get(i).getValue1().size(); j++) {
 				nodeList.get(j).addCategory(name);
 			}
 		}
