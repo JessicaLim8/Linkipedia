@@ -1,11 +1,15 @@
+/*
+@author 
+*/
+
 import java.util.ArrayList;
 
 public class Sort {
 
-    private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) 
+    private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) //Comparables will be changed to ArrayList<T>
     {
         //Pre-condition for merge
-        assert isSorted(a, lo, mid);
+        assert isSorted(a, lo, mid);    //Create isSorted function
         assert isSorted(a, mid+1, hi);
 
         for(int k = lo; k <= hi; k++)
@@ -21,7 +25,7 @@ public class Sort {
                 a[k] = aux[j++];
             else if (j < hi)
                 a[k] = aux[i++];
-            else if (less(aux[j], aux[i]))
+            else if (less(aux[j], aux[i])) //Change to compareTo function
                 a[k] = aux[j++];
             else
                 a[k] = aux[i++];
@@ -31,7 +35,7 @@ public class Sort {
         assert isSorted(a, lo, hi);
     }
 
-    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi)
+    private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) //Comparables will be changed to ArrayList<T>
     {
         if (hi <= lo)
             return; 
@@ -41,7 +45,7 @@ public class Sort {
         merge(a, aux, lo, mid, hi);
     }
 
-    public boolean sort(Comparable[] a) 
+    public boolean sort(Comparable[] a) //Comparables will be changed to ArrayList<T>
     {
         aux = new Comparable[a.length];
         sort(a, aux, 0, a.length - 1);
