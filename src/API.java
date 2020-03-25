@@ -4,13 +4,13 @@ public class API {
     public static void main(String args[]) {
         /*
         ArrayList<Node> nodes = DataParser.parseNodes("data/names.txt");
-        ArrayList<Integer[]> connnections = DataParser.parseConnections("data/main.txt");
+        ArrayList<Integer[]> connections = DataParser.parseConnections("data/main.txt");
         ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/categories.txt");
         */
+    	
         ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt");
         ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/wiki-topcats-categories.txt");
         ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
-        DataParser.setCategories(nodes, categories);
 
         
         /* 
