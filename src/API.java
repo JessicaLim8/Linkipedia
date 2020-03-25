@@ -1,6 +1,31 @@
 import java.util.ArrayList;
 
 public class API {
+    public static void main(String args[]) {
+        /*
+        ArrayList<Node> nodes = DataParser.parseNodes("data/names.txt");
+        ArrayList<Integer[]> connnections = DataParser.parseConnections("data/main.txt");
+        ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/categories.txt");
+        */
+        ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt");
+        ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/wiki-topcats-categories.txt");
+        ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
+        DataParser.setCategories(nodes, categories);
+
+        
+        /* 
+        Graph graph = new Graph(nodes);
+        for (Pair<Integer, Integer> p : connnections)
+            graph.addEdge(p.getValue0(), p.getValue1());
+
+        // tests
+        Node a = search(graph, "Lebron James");
+        Node b = search(graph, "Toronto Raptors");
+        path(graph, a, b, 10);
+        */
+    }
+    
+    /*
     public static Node search(Graph graph, String title) {
         ArrayList<Node> results = graph.search(title);
         for (Node node : results)
@@ -19,18 +44,7 @@ public class API {
             System.out.println(dst.title());
         }
     }
+    */
 
-    public static void main() {
-        Node[] nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt", "data/wiki-topcats-categories");
-        ArrayList<Pair<Integer, Integer>> connnections = DataParser.parseConnections("wiki-topcats.txt");
 
-        Graph graph = new Graph(nodes);
-        for (Pair<Integer, Integer> p : connnections)
-            graph.addEdge(p.getValue0(), p.getValue1());
-
-        // tests
-        Node a = search(graph, "Lebron James");
-        Node b = search(graph, "Toronto Raptors");
-        path(graph, a, b, 10);
-    }
 }
