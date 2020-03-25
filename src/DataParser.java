@@ -2,10 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import org.javatuples.Pair;
 
 public class DataParser {	
-	public ArrayList<Node> parseNodes(String nodeFile) {	
+	public static ArrayList<Node> parseNodes(String nodeFile) {	
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		Node n;
 		
@@ -13,7 +12,7 @@ public class DataParser {
 			// read from input file
 			Scanner input = new Scanner(new File(nodeFile));
 			while (input.hasNext()) {
-				String curr = input.next();
+				String curr = input.nextLine();
 				// split text into int and string
 				String[] elements = curr.split(" ", 2);
 				int index = Integer.parseInt(elements[0]);
@@ -30,18 +29,17 @@ public class DataParser {
 		return nodeList;
 	}
 	
-	public ArrayList<Pair<String, ArrayList<Integer>>> parseCategories(String catFile) {
+	public static ArrayList<Pair<String, ArrayList<Integer>>> parseCategories(String catFile) {
 		ArrayList<Pair<String, ArrayList<Integer>>> catList = new ArrayList<Pair<String, ArrayList<Integer>>>();
-		Pair<String, ArrayList<Integer>> tempTuple;
 		ArrayList<Integer> verticies;
 				
 		try {
 			// read from input file
 			Scanner input = new Scanner(new File(catFile));
 			while (input.hasNext()) {
-				String curr = input.next();
+				String curr = input.nextLine();
 				// split text into category name and vertices list
-				String[] elements = curr.split(":", 2)[1].split(";");
+				String[] elements = curr.split(":", 2)[1].split("; ");
 				String name = elements[0];
 				// split vertex list into individual vertices
 				String[] stringV = elements[1].split(" ");
@@ -50,7 +48,7 @@ public class DataParser {
 				for (int i = 0; i < stringV.length; i++) 
 		            verticies.add(Integer.parseInt(stringV[i])); 
 				// add node to list
-				tempTuple = new Pair(name, verticies);
+				Pair<String, ArrayList<Integer>> tempTuple = new Pair(name, verticies);
 				catList.add(tempTuple);
 			};	
 			input.close();
@@ -63,14 +61,14 @@ public class DataParser {
 	
 	}
 	
-	public ArrayList<Integer[]> parseConnections(String connectFile) {		
+	public static ArrayList<Integer[]> parseConnections(String connectFile) {		
 		ArrayList<Integer[]> connectList = new ArrayList<Integer[]>();
 			
 		try {
 			// read from input file
 			Scanner input = new Scanner(new File(connectFile));
 			while (input.hasNext()) {
-				String curr = input.next();
+				String curr = input.nextLine();
 				// split text into int and string
 				String[] elements = curr.split(" ");
 				Integer[] tempList = {Integer.parseInt(elements[0]), Integer.parseInt(elements[1])};
@@ -84,10 +82,10 @@ public class DataParser {
 		return connectList;
 	}
 	
-	public void setCategories(ArrayList<Node> nodes, ArrayList<Pair<String, ArrayList<Integer>>> categories) {
+	public static void setCategories(ArrayList<Node> nodes, ArrayList<Pair<String, ArrayList<Integer>>> categories) {
 		for (int i = 0; i < categories.size(); i++) {
-			String name = categories.get(i).getValue0();
-			for (int j = 0; j < categories.get(i).getValue1().size(); j++) {
+			String name = categories.get(i).getA();
+			for (int j = 0; j < categories.get(i).getB().size(); j++) {
 				nodes.get(j).addCategory(name);
 			}
 		}
