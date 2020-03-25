@@ -42,12 +42,15 @@ public class DataParser {
 				String[] elements = curr.split(":", 2)[1].split("; ");
 				String name = elements[0];
 				// split vertex list into individual vertices
-				String[] stringV = elements[1].split(" ");
 				verticies = new ArrayList<Integer>();
-				// add each vertex to arraylist
-				for (int i = 0; i < stringV.length; i++) 
-		            verticies.add(Integer.parseInt(stringV[i])); 
-				// add node to list
+				// check if verticies exist
+				if (elements.length > 1) {
+					String[] stringV = elements[1].split(" ");
+					// add each vertex to arraylist
+					for (int i = 0; i < stringV.length; i++) 
+			            verticies.add(Integer.parseInt(stringV[i])); 
+					// add node to list
+				}
 				Pair<String, ArrayList<Integer>> tempTuple = new Pair(name, verticies);
 				catList.add(tempTuple);
 			};	
