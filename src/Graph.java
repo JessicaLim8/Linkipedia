@@ -28,6 +28,26 @@ public class Graph {
 			adj[n] = new ArrayList<Integer>();
 	}
 
+	public Graph(ArrayList<Node> nodes) {
+		this.nodes = new Node[nodes.size()];
+		this.N = nodes.size();
+		this.E = 0;
+
+		for (int i = 0; i < this.N; i++)
+			this.nodes[i] = nodes.get(i);
+
+		// copy Node object references to sorted_nodes
+		this.sorted_nodes = new Node[N];
+		for (int i = 0; i < N; i++)
+			sorted_nodes[i] = nodes[i];
+//		sort(sorted_nodes);
+
+		// initialize adj list
+		adj = (ArrayList<Integer>[]) new ArrayList[N];
+		for (int n = 0; n < N; n++)
+			adj[n] = new ArrayList<Integer>();
+	}
+
 	public int N() {
 		return N;
 	}
@@ -55,7 +75,7 @@ public class Graph {
 	}
 
 	public ArrayList<Node> search(String title) {
-//		ArrayList<Integer> indices = searchSubstring(sorted_nodes, new Node(-1, title), 100);
+//		ArrayList<Integer> indices = searchSubstring(sorted_nodes, new Node(-1, title), 100, Node.SubstringComparator);
 		ArrayList<Node> results = new ArrayList<Node>();
 //		for (Integer i : indices)
 //			results.add(sorted_nodes[i]);
