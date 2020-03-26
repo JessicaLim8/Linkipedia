@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DataParser {	
-	public static ArrayList<Node> parseNodes(String nodeFile) {	
+	public static ArrayList<Node> parseNodes(String nodeFile, String catFile) {	
 		ArrayList<Node> nodeList = new ArrayList<Node>();
 		Node n;
 		
@@ -26,6 +26,8 @@ public class DataParser {
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		ArrayList<Pair<String, ArrayList<Integer>>> categories = parseCategories(catFile);
+		setCategories(nodeList, categories);
 		return nodeList;
 	}
 	

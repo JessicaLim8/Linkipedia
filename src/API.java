@@ -8,7 +8,7 @@ public class API {
         ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/categories.txt");
         */
     	
-        ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt");
+        ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt", "data/wiki-topcats-categories.txt");
         ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/wiki-topcats-categories.txt");
         ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
 
