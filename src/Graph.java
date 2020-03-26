@@ -19,7 +19,7 @@ public class Graph {
 		// copy Node object references to sorted_nodes
 		this.sorted_nodes = new Node[N];
 		for (int i = 0; i < N; i++)
-			sorted_nodes[i] = nodes[i];
+			sorted_nodes[i] = this.nodes[i];
 //		sort(sorted_nodes);
 
 		// initialize adj list
@@ -39,7 +39,7 @@ public class Graph {
 		// copy Node object references to sorted_nodes
 		this.sorted_nodes = new Node[N];
 		for (int i = 0; i < N; i++)
-			sorted_nodes[i] = nodes[i];
+			sorted_nodes[i] = this.nodes[i];
 //		sort(sorted_nodes);
 
 		// initialize adj list
