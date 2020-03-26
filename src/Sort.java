@@ -18,14 +18,22 @@ public class Sort {
 
         for (int k = lo; k <= hi; k++) 
         {
-            if (i > mid)
-                a[k] = aux[j++];
-            else if (j < hi)
-                a[k] = aux[i++];
-            else if (compareTo(aux[j], aux[i] < 0)) //Change to compareTo function
-                a[k] = aux[j++];
-            else
-                a[k] = aux[i++];
+            if (i > mid) {
+                a.set(k, aux.get(j));
+                j++;
+            }                
+            else if (j < hi) {
+                a.set(k, aux.get(i));
+                i++;
+            }
+            else if (compareTo(aux.get(j), aux.get(i)) < 0)) {
+                a.set(k, aux.get(j));
+                j++;
+            }
+            else {
+                a.set(k, aux.get(i));
+                i++;
+            }
         }
 
         //Post-condition for merge
