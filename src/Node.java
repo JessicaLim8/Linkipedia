@@ -11,15 +11,15 @@ public class Node {
         this.categories = new ArrayList<String>();
     }
 
-    public int getID() {
+    public int id() {
         return id;
     }
 
-    public String getTitle() {
+    public String title() {
         return title;
     }
 
-    public ArrayList<String> getCategories() {
+    public ArrayList<String> categories() {
         return categories;
     }
 
