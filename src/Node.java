@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Node implements Comparable<Node> {
     int id;
@@ -32,7 +33,7 @@ public class Node implements Comparable<Node> {
 		return this.title.compareTo(o.title());
 	}
 
-	public static class SubstringComparator {
+	public static class SubstringComparator implements Comparator<Node> {
 		public int compare(Node a, Node b) {
 			int alen = a.title().length();
 			int blen = b.title().length();
