@@ -87,7 +87,7 @@ public class DataParser {
 		return connectList;
 	}
 	
-	public static void setCategories(ArrayList<Node> nodes, ArrayList<Pair<String, ArrayList<Integer>>> categories) {
+	private static void setCategories(ArrayList<Node> nodes, ArrayList<Pair<String, ArrayList<Integer>>> categories) {
 		for (int i = 0; i < categories.size(); i++) {
 			String name = categories.get(i).getA();
 			for (int j = 0; j < categories.get(i).getB().size(); j++) {
