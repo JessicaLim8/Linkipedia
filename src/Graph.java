@@ -19,8 +19,28 @@ public class Graph {
 		// copy Node object references to sorted_nodes
 		this.sorted_nodes = new Node[N];
 		for (int i = 0; i < N; i++)
-			sorted_nodes[i] = nodes[i];
-		// TODO sort sorted_nodes by "title"
+			sorted_nodes[i] = this.nodes[i];
+		sort(sorted_nodes);
+
+		// initialize adj list
+		adj = (ArrayList<Integer>[]) new ArrayList[N];
+		for (int n = 0; n < N; n++)
+			adj[n] = new ArrayList<Integer>();
+	}
+
+	public Graph(ArrayList<Node> nodes) {
+		this.nodes = new Node[nodes.size()];
+		this.N = nodes.size();
+		this.E = 0;
+
+		for (int i = 0; i < this.N; i++)
+			this.nodes[i] = nodes.get(i);
+
+		// copy Node object references to sorted_nodes
+		this.sorted_nodes = new Node[N];
+		for (int i = 0; i < N; i++)
+			sorted_nodes[i] = this.nodes[i];
+		sort(sorted_nodes);
 
 		// initialize adj list
 		adj = (ArrayList<Integer>[]) new ArrayList[N];
@@ -50,12 +70,21 @@ public class Graph {
 	}
 
 	public String toString() {
+		// TODO
 		return "TODO";
 	}
 
+	public ArrayList<Node> search(String title) {
+		ArrayList<Integer> indices = binarySearchAll(sorted_nodes, new Node(-1, title), 100, Node.SubstringComparator);
+		ArrayList<Node> results = new ArrayList<Node>();
+		for (Integer i : indices)
+			results.add(sorted_nodes[i]);
+		return results;
+	}
+
 	// output paths do NOT include src and dst and are ordered from src to dst, n must be greater than or equal to 1
-	public ArrayList<ArrayList<Integer>> nShortestPaths(int src, int dst, int n) throws Exception {
-		ArrayList<ArrayList<Integer>> paths = new ArrayList<ArrayList<Integer>>();
+	public ArrayList<ArrayList<Node>> nShortestPaths(Node src, Node dst, int n) {
+		ArrayList<ArrayList<Node>> paths = new ArrayList<ArrayList<Node>>();
 
 		// base case
 		if (src == dst)
@@ -69,7 +98,7 @@ public class Graph {
 		}
 
 		Queue<Integer> queue = new LinkedList<Integer>();
-		queue.add(src);
+		queue.add(src.id());
 
 		int v;
 		while (!queue.isEmpty()) {
@@ -81,11 +110,11 @@ public class Graph {
                     prev[w] = v;
                     queue.add(w);
                 }
-                if (w == dst) {
-                	ArrayList<Integer> path = new ArrayList<Integer>();
-                	int i = prev[dst];
+                if (w == dst.id()) {
+                	ArrayList<Node> path = new ArrayList<Node>();
+                	int i = prev[dst.id()];
                 	while (prev[i] != -1) {
-                		path.add(i,1);
+                		path.add(0, nodes[i]);
                 		i = prev[i];
                 	}
                 	paths.add(path);
