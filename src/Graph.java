@@ -75,7 +75,7 @@ public class Graph {
 	}
 
 	public ArrayList<Node> search(String title) {
-		ArrayList<Integer> indices = Search.binarySearchAll(sorted_nodes, new Node(-1, title), 100, new Node.SubstringComparator());
+		ArrayList<Integer> indices = Search.binarySearchAll(sorted_nodes, new Node(-1, title.toLowerCase()), 100, new Node.SubstringComparator());
 		ArrayList<Node> results = new ArrayList<Node>();
 		for (Integer i : indices)
 			results.add(sorted_nodes[i]);
