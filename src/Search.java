@@ -23,16 +23,15 @@ public class Search {
         return -1;
     }
 
-
     public static <T> int binarySearchAll (T[] arr, T target, Comparator<T> c) {
         int lo = 0;
         int hi = arr.length - 1;
 
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
-            if      (c.compareTo(target, arr[mid]) < 0)
+            if      (c.compare(target, arr[mid]) < 0)
                 hi = mid - 1;
-            else if (c.compareTo(target, arr[mid]) > 0) 
+            else if (c.compare(target, arr[mid]) > 0) 
                 lo = mid + 1;
             else //(c.compareTo(target, arr[mid]) == 0)
                 return mid;
@@ -83,9 +82,9 @@ public class Search {
 
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
-            if      (c.compareTo(target, arr[mid]) < 0)
+            if      (c.compare(target, arr[mid]) < 0)
                 hi = mid - 1;
-            else if (c.compareTo(target, arr[mid]) > 0) 
+            else if (c.compare(target, arr[mid]) > 0) 
                 lo = mid + 1;
             else //)target.compareTo(arr[mid]) == 0)
             {
@@ -93,9 +92,9 @@ public class Search {
                 int pos = 0;
 
                 //Moves to the first index value that equals the target
-                while (c.compareTo(target, arr[mid]) == 0)
+                while (c.compare(target, arr[mid]) == 0)
                     mid--;
-                while ((c.compareTo(target, arr[mid]) == 0) && (pos < N))
+                while ((c.compare(target, arr[mid]) == 0) && (pos < N))
                     //Iterates arraylist position and mid until array is full of index values that match the target
                     list.set(pos++, mid++);
             }

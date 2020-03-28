@@ -57,7 +57,7 @@ public class Sort {
         a[p1] = a[p2];
         a[p2] = t;
     }
-
+    
     public static <T> void sort(T[] arr, Comparator<T> c) {
         //StdRandom.shuffle(arr); FIX ARRAY SHUFFLE
         sort2(arr, 0, arr.length - 1, c); 
@@ -84,11 +84,11 @@ public class Sort {
 
         while (true)
         {
-            while (c.compareTo(a[++i], a[lo]) > 0)
+            while (c.compare(a[++i], a[lo]) > 0)
                 if (i == hi) 
                     break;
 
-            while (c.compareTo(a[lo], a[--j]) > 0)
+            while (c.compare(a[lo], a[--j]) > 0)
                 if (j == lo)
                     break;
 
