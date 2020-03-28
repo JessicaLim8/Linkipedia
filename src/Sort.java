@@ -13,8 +13,13 @@ public class Sort {
 
     private static void sort(Comparable[] arr, int lo, int hi) 
     {
+        final int CUTOFF = 10; 
+        
         //Pre-condition: high marker should be greater than lower
-        if (hi <= lo) return;
+        if (hi <= lo) { // + CUTOFF - 1 (add after lo)
+            //insertionSort(arr, lo, hi);
+            return; 
+        }
 
         //Partitions array for quicksort and returns partition location
         int j = partition(arr, lo, hi);
@@ -99,5 +104,14 @@ public class Sort {
 
         exch(a, lo, j);
         return j;
+    }
+    
+    private static void insertionSort (Comparable[] a, int lo, int hi) {
+        int N = hi - lo;
+        for (int i = lo; i < N; i++)
+            for (int j = i; j > 0; j--)
+                if (a[j].compareTo(a[j-1]) < 0)
+                    exch(a, j, j-1);
+                else break;
     }
 }

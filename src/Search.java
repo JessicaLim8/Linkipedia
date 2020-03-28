@@ -75,7 +75,7 @@ public class Search {
 
     public static <T> ArrayList<Integer> binarySearchAll (T[] arr, T target, int N, Comparator<T> c) {
         //Creates an empty arraylist of size N with all values set to -1
-        ArrayList<Integer> list = new ArrayList<Integer>(Collections.nCopies(N, -1));
+        ArrayList<Integer> list = new ArrayList<Integer>;
 
         int lo = 0;
         int hi = arr.length - 1;
@@ -88,15 +88,28 @@ public class Search {
                 lo = mid + 1;
             else //)target.compareTo(arr[mid]) == 0)
             {
-                //Position in arraylist to be returned
-                int pos = 0;
+                int count = 1; 
+                int tempmid = mid;
 
                 //Moves to the first index value that equals the target
-                while (c.compare(target, arr[mid]) == 0)
-                    mid--;
-                while ((c.compare(target, arr[mid]) == 0) && (pos < N))
+                while ((c.compare(target, arr[mid]) == 0) && (mid >= 0) && (count <= N))
+                {
+                    list.add(mid--);
+                    count++;
+                }
+                
+                //Checks if array has max number of values
+                if (count > N)
+                    continue;
+
+                mid = tempmid;
+
+                while ((c.compare(target, arr[mid]) == 0) && (mid < arr.length) && (count <= N))
+                {
                     //Iterates arraylist position and mid until array is full of index values that match the target
-                    list.set(pos++, mid++);
+                    list.add(mid++);
+                    count++;
+                }
             }
         }
 
