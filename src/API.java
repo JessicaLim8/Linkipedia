@@ -19,20 +19,17 @@ public class API {
         }
         
         // tests
-        /*
         Node a = search(graph, "Lebron James");
         Node b = search(graph, "Toronto Raptors");
         path(graph, a, b, 10);
-        */
 
     }
     
-    /*
+
     public static Node search(Graph graph, String title) {
         ArrayList<Node> results = graph.search(title);
         for (Node node : results)
             System.out.println(node.title());
-
         return results.get(0);
     }
 
@@ -46,7 +43,5 @@ public class API {
             System.out.println(dst.title());
         }
     }
-    */
-
 
 }
