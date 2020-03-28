@@ -16,7 +16,7 @@ public class DataParser {
 				// split text into int and string
 				String[] elements = curr.split(" ", 2);
 				int index = Integer.parseInt(elements[0]);
-				String name = elements[1];
+				String name = elements[1].toLowerCase();
 				// add node to list
 				n = new Node(index, name);
 				nodeList.add(index, n);
