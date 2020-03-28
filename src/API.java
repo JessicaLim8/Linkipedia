@@ -13,16 +13,18 @@ public class API {
         ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
 
         
-        /* 
         Graph graph = new Graph(nodes);
-        for (Pair<Integer, Integer> p : connnections)
-            graph.addEdge(p.getValue0(), p.getValue1());
-
+        for (Integer[] pairs : connnections) {
+            graph.addEdge(pairs[0], pairs[1]);
+        }
+        
         // tests
+        /*
         Node a = search(graph, "Lebron James");
         Node b = search(graph, "Toronto Raptors");
         path(graph, a, b, 10);
         */
+
     }
     
     /*
