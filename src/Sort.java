@@ -1,58 +1,104 @@
 
+import java.util.Comparator;
+//import java.util.Random;
 
-import java.util.ArrayList;
 
+//Quicksort function
 public class Sort {
 
-    private static <T> void merge(ArrayList<T> a, ArrayList<T> aux, int lo, int mid, int hi)
+    public static void sort(Comparable[] arr) 
     {
-        //Pre-condition for merge
-        //assert isSorted(a, lo, mid);    //Create isSorted function
-        //assert isSorted(a, mid+1, hi);
+        //StdRandom.shuffle(arr); FIX ARRAY SHUFFLE
+        sort(arr, 0, arr.length - 1); 
+    }
 
-        //Copies ArraList a into auxiliary array
-        aux = new ArrayList<T>(a);
+    private static void sort(Comparable[] arr, int lo, int hi) 
+    {
+        //Pre-condition: high marker should be greater than lower
+        if (hi <= lo) return;
 
+        //Partitions array for quicksort and returns partition location
+        int j = partition(arr, lo, hi);
+
+        //Recursively sorts both partitions
+        sort(arr, lo, j - 1);
+        sort(arr, j+1, hi);
+
+    }
+
+    private static int partition(Comparable[] a, int lo, int hi) 
+    {
         int i = lo;
-        int j = mid + 1;
+        int j = hi + 1; 
 
-        for (int k = lo; k <= hi; k++) 
+        while (true)
         {
-            if (i > mid) {
-                a.set(k, aux.get(j));
-                j++;
-            }                
-            else if (j < hi) {
-                a.set(k, aux.get(i));
-                i++;
-            }
-            else if (compareTo(aux.get(j), aux.get(i)) < 0)) {
-                a.set(k, aux.get(j));
-                j++;
-            }
-            else {
-                a.set(k, aux.get(i));
-                i++;
-            }
+            while (a[++i].compareTo(a[lo]) > 0)
+                if (i == hi) 
+                    break;
+
+            while (a[lo].compareTo(a[--j]) > 0)
+                if (j == lo)
+                    break;
+
+            if (i >= j)
+                break;
+            
+            exch(a, i, j);
         }
 
-        //Post-condition for merge
-        //assert isSorted(a, lo, hi);
+        exch(a, lo, j);
+        return j;
     }
 
-    private static <T> void sort(ArrayList<T> a, ArrayList<T> aux, int lo, int hi)
-    {
-        if (hi <= lo)
-            return; 
-        int mid = lo + ((hi - lo) / 2);
-        sort(a, aux, lo, mid);
-        sort(a, aux, mid+1, hi);
-        merge(a, aux, lo, mid, hi);
+    //Generic function that swaps two values of an array
+    private static final <T> void exch(T[] a, int p1, int p2) {
+        T t = a[p1];
+        a[p1] = a[p2];
+        a[p2] = t;
     }
 
-    public static <T> void sort(ArrayList<T> a)
+    public static <T> void sort(T[] arr, Comparator<T> c) {
+        //StdRandom.shuffle(arr); FIX ARRAY SHUFFLE
+        sort2(arr, 0, arr.length - 1, c); 
+    }
+
+    private static <T> void sort2(T[] arr, int lo, int hi, Comparator<T> c) 
     {
-        ArrayList<T> aux = new ArrayList<T>();
-        sort(a, aux, 0, a.size() - 1);
+        //Pre-condition: high marker should be greater than lower
+        if (hi <= lo) return;
+
+        //Partitions array for quicksort and returns partition location
+        int j = partition2(arr, lo, hi, c);
+
+        //Recursively sorts both partitions
+        sort2(arr, lo, j - 1, c);
+        sort2(arr, j+1, hi, c);
+
+    }
+
+    private static <T> int partition2(T[] a, int lo, int hi, Comparator<T> c) 
+    {
+        int i = lo;
+        int j = hi + 1; 
+
+        while (true)
+        {
+            while (c.compareTo(a[++i], a[lo]) > 0)
+                if (i == hi) 
+                    break;
+
+            while (c.compareTo(a[lo], a[--j]) > 0)
+                if (j == lo)
+                    break;
+
+            if (i >= j)
+                break;
+            
+            exch(a, i, j);
+        }
+
+        exch(a, lo, j);
+        return j;
     }
 }
