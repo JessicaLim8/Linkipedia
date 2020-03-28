@@ -20,7 +20,7 @@ public class Graph {
 		this.sorted_nodes = new Node[N];
 		for (int i = 0; i < N; i++)
 			sorted_nodes[i] = this.nodes[i];
-		sort(sorted_nodes);
+		Sort.sort(sorted_nodes);
 
 		// initialize adj list
 		adj = (ArrayList<Integer>[]) new ArrayList[N];
@@ -40,7 +40,7 @@ public class Graph {
 		this.sorted_nodes = new Node[N];
 		for (int i = 0; i < N; i++)
 			sorted_nodes[i] = this.nodes[i];
-		sort(sorted_nodes);
+		Sort.sort(sorted_nodes);
 
 		// initialize adj list
 		adj = (ArrayList<Integer>[]) new ArrayList[N];
@@ -75,7 +75,7 @@ public class Graph {
 	}
 
 	public ArrayList<Node> search(String title) {
-		ArrayList<Integer> indices = binarySearchAll(sorted_nodes, new Node(-1, title), 100, Node.SubstringComparator);
+		ArrayList<Integer> indices = Search.binarySearchAll(sorted_nodes, new Node(-1, title), 100, new Node.SubstringComparator());
 		ArrayList<Node> results = new ArrayList<Node>();
 		for (Integer i : indices)
 			results.add(sorted_nodes[i]);
