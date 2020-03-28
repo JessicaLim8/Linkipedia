@@ -37,7 +37,7 @@ public class Node implements Comparable<Node> {
 		public int compare(Node a, Node b) {
 			int alen = a.title().length();
 			int blen = b.title().length();
-			return (alen <= blen) && (a.title().substring(0, alen).equals(b.title().substring(0, alen))) ? 0 : a.compareTo(b);
+			return (alen <= blen) && (a.title().equals(b.title().substring(0, alen))) ? 0 : a.compareTo(b);
 		}
 	}
 }

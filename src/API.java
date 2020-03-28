@@ -8,9 +8,9 @@ public class API {
         ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/categories.txt");
         */
     	
-        ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt", "data/wiki-topcats-categories.txt");
-        ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/wiki-topcats-categories.txt");
-        ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
+        ArrayList<Node> nodes = DataParser.parseNodes("data/test-topcats-page-names.txt", "data/test-topcats-categories.txt");
+//        ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/test-topcats-categories.txt");
+        ArrayList<Integer[]> connnections = DataParser.parseConnections("data/test-topcats.txt");
 
         
         Graph graph = new Graph(nodes);
@@ -19,12 +19,12 @@ public class API {
         }
         
         // tests
-        Node a = search(graph, "Lebron James");
-        Node b = search(graph, "Toronto Raptors");
-        path(graph, a, b, 10);
-
+//        Node a = search(graph, "Kleroterion");
+//        Node b = search(graph, "Bobby Kerr");
+//        Node a = search(graph, "alp");
+//        Node d = search(graph, "delta");
+//        path(graph, a, d, 1);
     }
-    
 
     public static Node search(Graph graph, String title) {
         ArrayList<Node> results = graph.search(title);
@@ -37,9 +37,9 @@ public class API {
         ArrayList<ArrayList<Node>> paths = graph.nShortestPaths(src, dst, n);
 
         for (ArrayList<Node> path : paths) {
-            System.out.print(src.title() + " -> ");
+        	System.out.print(src.title() + " -> ");
             for (Node node : path)
-                System.out.println(node.title());
+                System.out.print(node.title() + " -> ");
             System.out.println(dst.title());
         }
     }

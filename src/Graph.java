@@ -120,7 +120,7 @@ public class Graph {
                 	paths.add(path);
                 }
                 if (paths.size() >= n)
-                	return paths;;
+                	return paths;
             }
 		}
 
