@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class API {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /*
         ArrayList<Node> nodes = DataParser.parseNodes("data/names.txt");
         ArrayList<Integer[]> connections = DataParser.parseConnections("data/main.txt");
