@@ -28,10 +28,19 @@ public class Node implements Comparable<Node> {
         categories.add(category);
     }
 
-    public boolean equals(Node that) {
-        return this.id == that.id() && this.title.equals(that.title());
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null || this.getClass() != that.getClass()) {
+            return false;
+        }
+        Node n = (Node) that;
+        return this.id == n.id() && this.title.equals(n.title());
     }
 
+    @Override
     public String toString() {
         return "" + id + ", " + title;
     }
