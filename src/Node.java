@@ -28,9 +28,17 @@ public class Node implements Comparable<Node> {
         categories.add(category);
     }
 
+    public boolean equals(Node that) {
+        return this.id == that.id() && this.title.equals(that.title());
+    }
+
+    public String toString() {
+        return "" + id + ", " + title;
+    }
+
 	@Override
-	public int compareTo(Node o) {
-		return this.title.compareTo(o.title());
+	public int compareTo(Node that) {
+		return this.title.compareTo(that.title());
 	}
 
 	public static class SubstringComparator implements Comparator<Node> {
