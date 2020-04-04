@@ -51,8 +51,8 @@ public class TestSort {
         Sort.quickSort(narr);
 
         // test if sorted
-        assertArrayEquals(iarr, correct_iarr);
-        assertArrayEquals(sarr, correct_sarr);
-        assertArrayEquals(narr, correct_narr);
+        assertArrayEquals(correct_iarr, iarr);
+        assertArrayEquals(correct_sarr, sarr);
+        assertArrayEquals(correct_narr, narr);
     }
 }
