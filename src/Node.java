@@ -55,9 +55,7 @@ public class Node implements Comparable<Node> {
 			int alen = a.title().length();
             int blen = b.title().length();
 
-            if (alen <= blen)
-                return (a.title().equals(b.title().substring(0, alen))) ? 0 : a.compareTo(b);
-            return (b.title().equals(a.title().substring(0, blen))) ? 0 : b.compareTo(a);
+            return alen < blen && a.title().equals(b.title().substring(0, alen)) ? 0 : a.compareTo(b);
 		}
 	}
 }

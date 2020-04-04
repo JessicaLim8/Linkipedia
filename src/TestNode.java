@@ -65,9 +65,13 @@ public class TestNode {
         // left less than right
         assertTrue(c.compare(new Node(0, "bananab"), new Node(-1, "bananaz")) < 0);
         assertTrue(c.compare(new Node(0, "A"), new Node(-1, "a")) < 0);
+        assertTrue(c.compare(new Node(0, "aa"), new Node(-1, "b")) < 0);
+        assertTrue(c.compare(new Node(0, "B"), new Node(-1, "aapple")) < 0);
 
         // left greater than right (flip of above)
         assertTrue(c.compare(new Node(-1, "bananaz"), new Node(0, "bananab")) > 0);
         assertTrue(c.compare(new Node(-1, "a"), new Node(0, "A")) > 0);
+        assertTrue(c.compare(new Node(0, "b"), new Node(-1, "aa")) > 0);
+        assertTrue(c.compare(new Node(0, "aapple"), new Node(-1, "B")) > 0);
     }
 }
