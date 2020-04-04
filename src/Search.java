@@ -40,8 +40,7 @@ public class Search {
     }
 
     public static ArrayList<Integer> binarySearchAll(Comparable[] arr, Comparable target, int N) {
-        //Creates an empty arraylist of size N with all values set to -1
-        ArrayList<Integer> list = new ArrayList<Integer>(Collections.nCopies(N, -1));
+        ArrayList<Integer> list = new ArrayList<Integer>();
 
         int lo = 0;
         int hi = arr.length - 1;
@@ -53,29 +52,34 @@ public class Search {
             else if (target.compareTo(arr[mid]) > 0)
                 lo = mid + 1;
             else { // target.compareTo(arr[mid]) == 0)
-            	int count = 1;
-                int tempmid = mid;
+                // add first target found to list
+                int count = 1;
+                list.add(mid);
 
-                //Moves to the first index value that equals the target
-                while ((target.compareTo(arr[mid]) == 0) && (mid >= 0) && (count <= N)) {
-                    list.add(mid--);
+                // preserve mid
+                int tempmid = mid - 1;
+
+                // adds all targets found to the left of mid
+                while ((count < N) && (tempmid >= 0) && (target.compareTo(arr[tempmid]) == 0)) {
+                    list.add(tempmid--);
                     count++;
                 }
 
-                mid = tempmid;
+                // restore mid to temp var
+                tempmid = mid + 1;
 
-                //Iterates arraylist position and mid until array is full of index values that match the target
-                while ((target.compareTo(arr[mid]) == 0) && (mid < arr.length) && (count <= N)) {
-                    list.add(mid++);
+                // adds all targets found to the right of mid
+                while ((count < N) && (tempmid < arr.length) && (target.compareTo(arr[tempmid]) == 0)) {
+                    list.add(tempmid++);
                     count++;
                 }
+                break;
             }
         }
         return list;
     }
 
     public static <T> ArrayList<Integer> binarySearchAll (T[] arr, T target, int N, Comparator<T> c) {
-        //Creates an empty arraylist of size N with all values set to -1
         ArrayList<Integer> list = new ArrayList<Integer>();
 
         int lo = 0;
@@ -87,24 +91,29 @@ public class Search {
                 hi = mid - 1;
             else if (c.compare(target, arr[mid]) > 0)
                 lo = mid + 1;
-            else  { // target.compareTo(arr[mid]) == 0)
+            else { // c.compare(target, arr[mid]) == 0)
+                // add first target found to list
                 int count = 1;
-                int tempmid = mid;
+                list.add(mid);
 
-                //Moves to the first index value that equals the target
-                while ((c.compare(target, arr[mid]) == 0) && (mid >= 0) && (count <= N)) {
-                    list.add(mid--);
+                // preserve mid
+                int tempmid = mid - 1;
+
+                // adds all targets found to the left of mid
+                while ((count < N) && (tempmid >= 0) && (c.compare(target, arr[tempmid]) == 0)) {
+                    list.add(tempmid--);
                     count++;
                 }
 
-                mid = tempmid;
+                // restore mid to temp var
+                tempmid = mid + 1;
 
-                // Iterates arraylist position and mid until array is full of index values that match the target
-                while ((c.compare(target, arr[mid]) == 0) && (mid < arr.length) && (count <= N)) {
-
-                    list.add(mid++);
+                // adds all targets found to the right of mid
+                while ((count < N) && (tempmid < arr.length) && (c.compare(target, arr[tempmid]) == 0)) {
+                    list.add(tempmid++);
                     count++;
                 }
+                break;
             }
         }
         return list;
