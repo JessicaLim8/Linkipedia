@@ -27,11 +27,11 @@ public class Sort {
         int j = hi + 1;
 
         while (true) {
-            while (a[++i].compareTo(a[lo]) > 0)
+            while (a[++i].compareTo(a[lo]) < 0)
                 if (i == hi)
                     break;
 
-            while (a[lo].compareTo(a[--j]) > 0)
+            while (a[lo].compareTo(a[--j]) < 0)
                 if (j == lo)
                     break;
 
@@ -66,11 +66,11 @@ public class Sort {
         int j = hi + 1;
 
         while (true) {
-            while (c.compare(a[++i], a[lo]) > 0)
+            while (c.compare(a[++i], a[lo]) < 0)
                 if (i == hi)
                     break;
 
-            while (c.compare(a[lo], a[--j]) > 0)
+            while (c.compare(a[lo], a[--j]) < 0)
                 if (j == lo)
                     break;
 

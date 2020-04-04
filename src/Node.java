@@ -28,9 +28,26 @@ public class Node implements Comparable<Node> {
         categories.add(category);
     }
 
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null || this.getClass() != that.getClass()) {
+            return false;
+        }
+        Node n = (Node) that;
+        return this.id == n.id() && this.title.equals(n.title());
+    }
+
+    @Override
+    public String toString() {
+        return "" + id + ", " + title;
+    }
+
 	@Override
-	public int compareTo(Node o) {
-		return this.title.compareTo(o.title());
+	public int compareTo(Node that) {
+		return this.title.compareTo(that.title());
 	}
 
 	public static class SubstringComparator implements Comparator<Node> {
@@ -38,9 +55,7 @@ public class Node implements Comparable<Node> {
 			int alen = a.title().length();
             int blen = b.title().length();
 
-            if (alen <= blen)
-                return (a.title().equals(b.title().substring(0, alen))) ? 0 : a.compareTo(b);
-            return (b.title().equals(a.title().substring(0, blen))) ? 0 : b.compareTo(a);
+            return alen < blen && a.title().equals(b.title().substring(0, alen)) ? 0 : a.compareTo(b);
 		}
 	}
 }

@@ -8,7 +8,7 @@ public class Graph {
 	private int N; // number of nodes
 	private int E; // number of edges
 	private Node[] nodes; // nodes, indexed by id
-	private Node[] sorted_nodes; // nodes, sorted by article title
+	public Node[] sorted_nodes; // nodes, sorted by article title
 	private List<Integer>[] adj; // adjacency list
 
 	public Graph(Node[] nodes) {
@@ -20,7 +20,7 @@ public class Graph {
 		this.sorted_nodes = new Node[N];
 		for (int i = 0; i < N; i++)
 			sorted_nodes[i] = this.nodes[i];
-		Sort.sort(sorted_nodes);
+		Sort.quickSort(sorted_nodes);
 
 		// initialize adj list
 		adj = (ArrayList<Integer>[]) new ArrayList[N];
@@ -40,7 +40,7 @@ public class Graph {
 		this.sorted_nodes = new Node[N];
 		for (int i = 0; i < N; i++)
 			sorted_nodes[i] = this.nodes[i];
-		Sort.sort(sorted_nodes);
+		Sort.quickSort(sorted_nodes);
 
 		// initialize adj list
 		adj = (ArrayList<Integer>[]) new ArrayList[N];
