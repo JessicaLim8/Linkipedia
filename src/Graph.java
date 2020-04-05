@@ -69,61 +69,62 @@ public class Graph {
 		E++;
 	}
 
-	public String toString() {
-		// TODO
-		return "TODO";
-	}
-
 	public ArrayList<Node> search(String title) {
-		ArrayList<Integer> indices = Search.binarySearchAll(sorted_nodes, new Node(-1, title.toLowerCase()), 100, new Node.SubstringComparator());
+		ArrayList<Integer> indices = Search.binarySearchAll(
+			sorted_nodes, 
+			new Node(-1, title.toLowerCase()), 
+			100, 
+			new Node.SubstringComparator()
+		);
 		ArrayList<Node> results = new ArrayList<Node>();
 		for (Integer i : indices)
 			results.add(sorted_nodes[i]);
 		return results;
 	}
 
-	// output paths do NOT include src and dst and are ordered from src to dst, n must be greater than or equal to 1
+	public ArrayList<Node> shortestPath(Node src, Node dst) {
+		boolean[] marked = new boolean[N];
+        int[] edgeTo = new int[N];
+		validNode(src);
+		validNode(dst);
+	
+		Queue<Integer> q = new LinkedList<Integer>();
+		marked[src.id()] = true;
+		q.add(src.id());
+
+		while (!q.isEmpty()) {
+			int v = q.poll();
+			for (int w : adj(v)) {
+				if (w == dst.id()) {
+					edgeTo[w] = v;
+					marked[w] = true;
+
+					ArrayList<Node> path = new ArrayList<Node>();
+					int x = dst.id();
+					for (; x != src.id(); x = edgeTo[x])
+						path.add(0,nodes[x]);
+					path.add(0,nodes[x]);
+					return path;
+				}
+				if (!marked[w]) {
+					edgeTo[w] = v;
+					marked[w] = true;
+					q.add(w);
+				}
+			}
+		}
+
+		return null;
+	}
+
 	public ArrayList<ArrayList<Node>> nShortestPaths(Node src, Node dst, int n) {
 		ArrayList<ArrayList<Node>> paths = new ArrayList<ArrayList<Node>>();
-
-		// base case
-		if (src == dst)
-			return paths;
-
-		boolean[] marked = new boolean[N];
-		int[] prev = new int[N];
-		for (int i = 0; i < N; i++) {
-			marked[i] = false;
-			prev[i] = -1;
-		}
-
-		Queue<Integer> queue = new LinkedList<Integer>();
-		queue.add(src.id());
-
-		int v;
-		while (!queue.isEmpty()) {
-			v = queue.poll();
-
-			for (int w : this.adj(v)) {
-                if (!marked[w]) {
-                    marked[w] = true;
-                    prev[w] = v;
-                    queue.add(w);
-                }
-                if (w == dst.id()) {
-                	ArrayList<Node> path = new ArrayList<Node>();
-                	int i = prev[dst.id()];
-                	while (prev[i] != -1) {
-                		path.add(0, nodes[i]);
-                		i = prev[i];
-                	}
-                	paths.add(path);
-                }
-                if (paths.size() >= n)
-                	return paths;
-            }
-		}
-
+		// TODO
 		return paths;
+	}
+
+	private void validNode(Node n) {
+		if (n.id() < 0 || n.id() >= N)
+            throw new IllegalArgumentException("node id " + n + " is not between 0 and " + (N-1));
 	}
 }
