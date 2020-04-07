@@ -1,31 +1,43 @@
 import java.util.ArrayList;
+import java.time.Duration;
+import java.time.Instant;
 
 public class API {
     public static void main(String[] args) {
         // parse data
-        System.out.println("... loading graph ....");
+        System.out.println("... parsing data ....");
+        Instant start = Instant.now();
         ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt", "data/wiki-topcats-categories.txt");
         // ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/wiki-topcats-categories.txt");
         ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
+        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
 
         // build graph
+        System.out.println("... building graph ....");
+        start = Instant.now();
         Graph graph = new Graph(nodes);
         for (Integer[] pairs : connnections)
             graph.addEdge(pairs[0], pairs[1]);
-        
+        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
+
         // search
         System.out.println(".... searching graph ....");
+        start = Instant.now();
         Node a = search(graph, "Kleroterion");
         Node b = search(graph, "Bobby Kerr");
+        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
         
-        // paths
-        System.out.println(".... finding paths ....");
+        // path
+        System.out.println(".... finding single path ....");
+        start = Instant.now();
         path(graph, a, b);
-        // paths(graph, a, v, 5);
-    }
+        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
 
-    private static void testWikiTopcats() {
-        
+        // paths
+        System.out.println(".... finding multiple paths ....");
+        start = Instant.now();
+        paths(graph, a, b, 5);
+        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
     }
 
     public static Node search(Graph graph, String title) {

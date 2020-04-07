@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -61,6 +62,7 @@ public class Graph {
 	}
 
 	public Iterable<Integer> adj(int n) {
+		Collections.shuffle(adj[n]);
 		return adj[n];
 	}
 
@@ -119,8 +121,29 @@ public class Graph {
 
 	public ArrayList<ArrayList<Node>> nShortestPaths(Node src, Node dst, int n) {
 		ArrayList<ArrayList<Node>> paths = new ArrayList<ArrayList<Node>>();
-		// TODO
+
+		int count = 0;
+		int repeats = 0;
+		while (repeats < 3 && count < n) {
+			ArrayList<Node> path = shortestPath(src, dst);
+			if (pathExists(paths, path)) {
+				repeats++;
+			}
+			else {
+				repeats = 0;
+				paths.add(path);
+				count++;
+			}
+		}
+
 		return paths;
+	}
+
+	private boolean pathExists(ArrayList<ArrayList<Node>> paths, ArrayList<Node> path) {
+		for (ArrayList<Node> p : paths)
+			if (p.equals(path))
+				return true;
+		return false;
 	}
 
 	private void validNode(Node n) {
