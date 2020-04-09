@@ -3,6 +3,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class API {
+	
     public static void main(String[] args) {
         // parse data
         System.out.println("... parsing data ....");
@@ -39,6 +40,22 @@ public class API {
         paths(graph, a, b, 5);
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
     }
+    
+    public static Graph createGraph() {
+    	// parse data
+    	System.out.println("... parsing data ....");
+        ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt", "data/wiki-topcats-categories.txt");
+        // ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/wiki-topcats-categories.txt");
+        ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
+        
+        //build graph
+        System.out.println("... building graph ....");
+        Graph graph = new Graph(nodes);
+        for (Integer[] pairs : connnections)
+            graph.addEdge(pairs[0], pairs[1]);
+        
+        return graph;
+    }
 
     public static ArrayList<Node> searchNode(Graph graph, String title, int max) {
         ArrayList<Node> results = graph.search(title);
@@ -74,6 +91,23 @@ public class API {
         System.out.println();
         */
         return paths;
+    }
+    
+    public static ArrayList<String> pathToString(Graph graph, Node src, Node dst, int x) {
+    	ArrayList<ArrayList<Node>> pathsList = findMulPaths(graph, src, dst, x);
+    	ArrayList<String> stringPath = new ArrayList<String>();
+    	for (ArrayList<Node> path: pathsList) {
+    		String sPath = "";
+    		for (int i = 0; i < path.size(); i++) {
+    			sPath += path.get(i).title();
+    			if (i != path.size() - 1) {
+    				sPath += " -> ";
+    			}
+    		}
+    		stringPath.add(sPath);
+    		
+    	}
+        return stringPath;
     }
 
     public static Node search(Graph graph, String title) {
