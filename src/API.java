@@ -26,7 +26,7 @@ public class API {
         Node a = search(graph, "Kleroterion");
         Node b = search(graph, "Bobby Kerr");
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
-        
+
         // path
         System.out.println(".... finding single path ....");
         start = Instant.now();
@@ -38,6 +38,42 @@ public class API {
         start = Instant.now();
         paths(graph, a, b, 5);
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds");
+    }
+
+    public static ArrayList<Node> searchNode(Graph graph, String title, int max) {
+        ArrayList<Node> results = graph.search(title);
+        for (Node node : results)
+        /*for (Node node : results)
+            System.out.println(node.title());
+        System.out.println();*/
+        if (results.size() > max) {
+            results = new ArrayList<Node>(results.subList(0, max));
+        }
+        return results;
+    }
+
+    public static ArrayList<Node> findPath(Graph graph, Node src, Node dst) {
+        ArrayList<Node> path = graph.shortestPath(src, dst);
+        /*
+        for (Node node : path)
+            System.out.print(node.title() + " -> ");
+        System.out.println();
+        return results.get(0);
+        */
+        return path;
+    }
+
+    public static ArrayList<ArrayList<Node>> findMulPaths(Graph graph, Node src, Node dst, int n) {
+        ArrayList<ArrayList<Node>> paths = graph.nShortestPaths(src, dst, n);
+        /*
+        for (ArrayList<Node> path : paths) {
+            for (Node node : path)
+                System.out.print(node.title() + " -> ");
+            System.out.println();
+        }
+        System.out.println();
+        */
+        return paths;
     }
 
     public static Node search(Graph graph, String title) {
