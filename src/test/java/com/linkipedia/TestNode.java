@@ -1,24 +1,11 @@
-import org.junit.*;
-import static org.junit.Assert.*;
+package com.linkipedia;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Comparator;
 
 public class TestNode {
-    private Node n1;
-    private Node n2;
-
-    @Before
-    public void setUp() {
-        n1 = new Node(0, "apple");
-        n2 = new Node(0, "applepen");
-    }
-
-    @After
-    public void tearDown() {
-        n1 = null;
-        n2 = null;
-    }
-
     @Test
     public void testEquals() {
         assertTrue(new Node(0, "apple").equals(new Node(0, "apple")));

@@ -1,5 +1,9 @@
-import org.junit.*;
-import static org.junit.Assert.*;
+package com.linkipedia;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -10,7 +14,7 @@ public class TestSearch {
     private String[] sarr;
     private Node[] narr;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         iarr = new Integer[]{10,20,30,50,50,50,70,80,90};
         sarr = new String[]{"a", "aabb", "aabb", "aabb", "aabb", "c", "z"};
@@ -25,7 +29,7 @@ public class TestSearch {
         };
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         iarr = null;
         sarr = null;

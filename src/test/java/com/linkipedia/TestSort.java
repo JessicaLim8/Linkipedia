@@ -1,14 +1,16 @@
-import org.junit.*;
-import static org.junit.Assert.*;
+package com.linkipedia;
 
-import java.util.Arrays;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestSort {
     private Integer[] iarr;
     private String[] sarr;
     private Node[] narr;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         iarr = new Integer[]{5,6,7,9,3,4,8,1,0,2};
         sarr = new String[]{"g", "c", "b", "f", "a", "d", "e"};
@@ -23,7 +25,7 @@ public class TestSort {
         };
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         iarr = null;
         sarr = null;
