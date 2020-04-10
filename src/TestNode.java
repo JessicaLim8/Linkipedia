@@ -56,11 +56,11 @@ public class TestNode {
         assertTrue(c.compare(new Node(100, "Zo"), new Node(1, "Zombie")) == 0);
         assertTrue(c.compare(new Node(0, "B"), new Node(1, "B anaNa")) == 0);
 
-        // right substring right (flip of above)
-        assertTrue(c.compare(new Node(0, "apple"), new Node(-1, "app")) == 0);
-        assertTrue(c.compare(new Node(0, "apple"), new Node(20, "")) == 0);
-        assertTrue(c.compare(new Node(1, "Zombie"), new Node(100, "Zo")) == 0);
-        assertTrue(c.compare(new Node(1, "B anaNa"), new Node(0, "B")) == 0);
+        // right not substring right (flip of above)
+        assertTrue(c.compare(new Node(0, "apple"), new Node(-1, "app")) != 0);
+        assertTrue(c.compare(new Node(0, "apple"), new Node(20, "")) != 0);
+        assertTrue(c.compare(new Node(1, "Zombie"), new Node(100, "Zo")) != 0);
+        assertTrue(c.compare(new Node(1, "B anaNa"), new Node(0, "abcd")) != 0);
 
         // left less than right
         assertTrue(c.compare(new Node(0, "bananab"), new Node(-1, "bananaz")) < 0);
