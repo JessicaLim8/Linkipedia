@@ -10,12 +10,10 @@ public class API {
 	public static int numPath = 5;
 	
 	
-	/* Arguments can be included in the form of 
-	Source String, Destination String, # search results, # path results
-	*/
+	// arguments can be included in the form of 
+	// source String, destination String, # search results, # path results
     public static void main(String[] args) {
-    	
-    	// Get information from args
+    	// get information from args
     	if (args.length == 4) {
     		s1 = args[0];
     		s2 = args[1];
@@ -25,7 +23,6 @@ public class API {
     	
         // parse data
         Instant start = Instant.now();
-    	// parse data
         Graph graph = createGraph();
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
 
@@ -36,7 +33,7 @@ public class API {
         ArrayList<Node>  nodes2 = searchNode(graph, s2, numSearch);
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
         
-        // Print Search Results
+        // print search results
         System.out.println("Results for Searching " + s1);
         for (Node node : nodes1)
         	System.out.println(node.title());
@@ -46,7 +43,7 @@ public class API {
         	System.out.println(node.title());
         System.out.println();
 
-        // Paths using the first instance of any search result
+        // paths using the first instance of any search result
         System.out.println(".... Finding Multiple Paths ....");
         start = Instant.now();
         Node n1 = nodes1.size() > 0 ? nodes1.get(0) : null;
@@ -54,7 +51,7 @@ public class API {
         ArrayList<String> stringPaths = pathToString(graph, n1, n2, 5);
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
         
-     // Print Path Results
+        // print path results
         System.out.println("Results for Paths between " + 
         		(n1 != null ? n1.title() : "N/A") + " and " + 
         		(n2 != null ? n2.title() : "N/A"));
@@ -80,13 +77,11 @@ public class API {
         return graph;
     }
 
-    // Find list of nodes that match specific string
+    // find list of nodes that match specific string
     public static ArrayList<Node> searchNode(Graph graph, String title, int max) {
         ArrayList<Node> results = graph.search(title);
-        for (Node node : results)
-        if (results.size() > max) {
+        if (results.size() > max)
             results = new ArrayList<Node>(results.subList(0, max));
-        }
         return results;
     }
     
@@ -96,14 +91,14 @@ public class API {
         return results.size() > 0 ? results.get(0) : null;
     }
     
-    // Find path between two nodes
+    // find path between two nodes
     public static ArrayList<Node> findPath(Graph graph, Node src, Node dst) {
     	if (src == null || dst == null) return null;
         ArrayList<Node> path = graph.shortestPath(src, dst);
         return path;
     }
 
-    // Find n paths between two nodes
+    // find n paths between two nodes
     public static ArrayList<ArrayList<Node>> findMulPaths(Graph graph, Node src, Node dst, int n) {
     	if (src == null || dst == null) return null;
         ArrayList<ArrayList<Node>> paths = graph.nShortestPaths(src, dst, n);
