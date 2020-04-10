@@ -1,3 +1,5 @@
+package com.linkipedia;
+
 public class Pair<A, B> {
     private A a;
     private B b;
@@ -22,7 +24,7 @@ public class Pair<A, B> {
     public void setB(B b) {
         this.b = b;
     }
-    
+
     public boolean equals(Pair<A, B> that) {
     	return (this.a == that.getA() && this.b == that.getB());
     }

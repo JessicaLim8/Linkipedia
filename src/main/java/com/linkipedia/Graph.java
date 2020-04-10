@@ -1,3 +1,5 @@
+package com.linkipedia;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -73,9 +75,9 @@ public class Graph {
 
 	public ArrayList<Node> search(String title) {
 		ArrayList<Integer> indices = Search.binarySearchAll(
-			sorted_nodes, 
-			new Node(-1, title.toLowerCase()), 
-			100, 
+			sorted_nodes,
+			new Node(-1, title.toLowerCase()),
+			100,
 			new Node.SubstringComparator()
 		);
 		ArrayList<Node> results = new ArrayList<Node>();
@@ -89,7 +91,7 @@ public class Graph {
         int[] edgeTo = new int[N];
 		validNode(src);
 		validNode(dst);
-	
+
 		Queue<Integer> q = new LinkedList<Integer>();
 		marked[src.id()] = true;
 		q.add(src.id());

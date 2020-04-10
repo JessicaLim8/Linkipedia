@@ -1,5 +1,9 @@
-import org.junit.*;
-import static org.junit.Assert.*;
+package com.linkipedia;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
@@ -7,7 +11,7 @@ public class TestGraph {
     private Graph g1;
     private Graph g2;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         g1 = new Graph(new Node[]{
             new Node(0, "alpha"),
@@ -60,7 +64,7 @@ public class TestGraph {
         g2.addEdge(8, 4);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         g1 = null;
         g2 = null;
