@@ -68,9 +68,11 @@
 <script>
     remEmpty = () => {
     var i, elements = document.getElementsByClassName('tab-pane');
+    var j, tabs = document.getElementsByClassName('list-group-item-action');
+    console.log(document.getElementById("list-tab").children);
     for (i = elements.length; i--;) {       
-      if(elements[i].innerHTML === "")  
-        elements[i].parentNode.removeChild(elements[i]);        
+      if(elements[i].innerHTML === "")
+        tabs[i].parentNode.removeChild(tabs[i]);
     }
   }
   
