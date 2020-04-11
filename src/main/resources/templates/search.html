@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Stylesheets -->
+    <!-- Stylesheets --> 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="./linkipedia.css" rel="stylesheet">    
 </head>
@@ -41,14 +41,19 @@
       <div class="container d-flex h-100 align-items-center">
 
         <div class="mx-auto text-center">
+          <div id="alert" class="alert alert-warning alert-dismissible fade show d-none" role="alert">
+            You must select both fields to proceed to the results page.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
             <div class="row">
-
-              <div class="col col-lg-6"><form class="form-inline">
-                <input type="text" class="form-control" id="first" placeholder="Starting page" th:value="${firstInput}">
-                <!-- <a id="firstBtn" href="&firstInput=" onclick="window.location.href += $(this).attr('href')+$('#first').val(); return false;" class="text-white btn btn-primary btn-leftpad">Search</a> -->
-                <a onclick=updateUrl() class="text-white btn btn-primary btn-leftpad">Search</a>
-              </form>
-              <div class="mt-5 btn-group-vertical" id="from">
+              <div class="col col-lg-6">
+                <form id="form1" class="form-inline">
+                  <input class="form-control" id="first" placeholder="Starting page" th:value="${firstInput}">
+                  <a type="submit" onclick=updateUrl() id="firstBtn" class="text-white btn btn-primary btn-leftpad">Search</a>
+                </form>
+              <div class="mt-5 btn-group-vertical is-primary" id="from">
                 <button href="&from=" onclick=addActiveFrom(0) th:text="${result1}" type="button" class="btn btn-light"></button>
                 <button href="&from=" onclick=addActiveFrom(1) th:text="${result2}" type="button" class="btn btn-light"></button>
                 <button href="&from=" onclick=addActiveFrom(2) th:text="${result3}" type="button" class="btn btn-light"></button>
@@ -56,11 +61,11 @@
                 <button href="&from=" onclick=addActiveFrom(4) th:text="${result5}" type="button" class="btn btn-light"></button>
               </div>
             </div>
-              <div class="col col-lg-6"><form class="form-inline">
-                <input type="text" class="form-control" id="second" placeholder="Ending page" th:value="${secondInput}">
-                <!-- <a id="secondBtn" href="&secondInput=" onclick="window.location.href += $(this).attr('href')+$('#second').val(); return false;"  class="text-white btn btn-primary btn-leftpad">Search</a> -->
-                <a onclick=updateUrl() class="text-white btn btn-primary btn-leftpad">Search</a>
-              </form>
+              <div class="col col-lg-6">
+                <form id="form2" class="form-inline">
+                  <input type="text" class="form-control" id="second" placeholder="Ending page" th:value="${secondInput}">
+                  <a type="submit" onclick=updateUrl() id="secondBtn" class="text-white btn btn-primary btn-leftpad">Search</a>
+                </form>
               <div class="mt-5 btn-group-vertical" id="to">
                 <button href="&to=" onclick=addActiveTo(0) th:text="${end1}" type="button" class="btn btn-light"/>
                 <button href="&to=" onclick=addActiveTo(1) th:text="${end2}" type="button" class="btn btn-light"/>
@@ -72,7 +77,6 @@
             </div>
             <div class="col col-lg-12 pt-5">
               <a onclick=goUrl() class="btn btn-primary text-white btn-block">Go ⇒</a>
-              
             </div>
         </div>
       </div>
@@ -93,6 +97,7 @@
     }
   }
 
+  // Methods for displaying currently selected option
   let from;
   let to; 
   const addActiveFrom = (num) => {
@@ -112,24 +117,47 @@
     to = num;
     return false;
   }
-
+  
+  // Method to correctly go from search to corresponding results page
   const goUrl = () => {
     if(from === undefined || to === undefined){
+      document.getElementById("alert").classList.remove("d-none");
       return false;
     }
-    
     const fromUrl = document.getElementById("from").children[from].innerHTML;
     const toUrl = document.getElementById("to").children[to].innerHTML;
     window.location.href = `/results?from=${fromUrl}&to=${toUrl}`;
     return false;
   }
-
+  // Updates URL when search button clicked
   const updateUrl = () => {
+    console.log("run");
     let firstInput = document.getElementById("first").value;
     let secondInput = document.getElementById("second").value;
     window.location.href = `/search?firstInput=${firstInput}&secondInput=${secondInput}`;
     return false;
   }
+
+  // Allows submission with "Enter" key
+  $('#form1').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+    updateUrl();
+    return false;
+  }
+});
+
+$('#form2').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    e.preventDefault();
+    updateUrl();
+    return false;
+  }
+});
+
+
   window.onload = addAnd();
 </script>
 </html>

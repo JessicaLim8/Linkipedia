@@ -88,7 +88,7 @@
   height: 100vh;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(22, 22, 22, 0.3) 0%, rgba(22, 22, 22, 0.7) 75%, #161616 100%), url("./bg-masthead3.jpg");
+  background: #333;
   background-position: center;
   background-repeat: repeat-x;
   background-attachment: scroll;
@@ -180,4 +180,8 @@ body {
 
 .para{
   width: 25%;
+}
+
+.active .btn-light{
+  color: #000 !important;
 }
