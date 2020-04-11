@@ -5,7 +5,6 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class API {
-
 	public static String s1 = "Kleroterion";
 	public static String s2 = "Bobby Kerr";
 	public static int numSearch = 5;

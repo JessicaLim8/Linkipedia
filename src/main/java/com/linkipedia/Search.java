@@ -2,7 +2,6 @@ package com.linkipedia;
 
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Search {
     public static int binarySearch(Comparable[] arr, Comparable target) {
@@ -94,25 +93,15 @@ public class Search {
             else if (c.compare(target, arr[mid]) > 0)
                 lo = mid + 1;
             else { // c.compare(target, arr[mid]) == 0)
-                // add first target found to list
-                int count = 1;
-                list.add(mid);
+                // go to leftmost equivalent node
+                while (mid >= 0 && c.compare(target, arr[mid]) == 0)
+                    mid--;
+                mid++;
 
-                // preserve mid
-                int tempmid = mid - 1;
-
-                // adds all targets found to the left of mid
-                while ((count < N) && (tempmid >= 0) && (c.compare(target, arr[tempmid]) == 0)) {
-                    list.add(tempmid--);
-                    count++;
-                }
-
-                // restore mid to temp var
-                tempmid = mid + 1;
-
-                // adds all targets found to the right of mid
-                while ((count < N) && (tempmid < arr.length) && (c.compare(target, arr[tempmid]) == 0)) {
-                    list.add(tempmid++);
+                // add equivalent nodes
+                int count = 0;
+                while (count < N && mid < arr.length && c.compare(target, arr[mid]) == 0) {
+                    list.add(mid++);
                     count++;
                 }
                 break;

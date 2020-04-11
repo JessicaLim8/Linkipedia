@@ -3,7 +3,6 @@ package com.linkipedia;
 import java.util.Comparator;
 
 public class Sort {
-
     public static void quickSort(Comparable[] arr) {
         //StdRandom.shuffle(arr); FIX ARRAY SHUFFLE
         quickSort(arr, 0, arr.length - 1);
