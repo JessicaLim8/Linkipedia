@@ -181,6 +181,10 @@
   .para{
     width: 25%;
   }
-  button:focus{
+  .btn-group-vertical .active{
+    background-color: #dea8a8 !important;
+  }
+
+  .list-group .active{
     background-color: #dea8a8 !important;
   }
