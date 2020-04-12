@@ -1,4 +1,4 @@
-# Link-ipedia
+# Linkipedia
 
 Final Project for Software Engineering 2XB3, Software Engineering Practice and Experience: Binding Theory to Practice.
 
