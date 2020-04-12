@@ -23,13 +23,11 @@ public class API {
     	}
 
         // parse data
-        Instant start = Instant.now();
         Graph graph = createGraph();
-        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
 
         // search for nodes matching string
         System.out.println(".... Searching Graph ....");
-        start = Instant.now();
+        Instant start = Instant.now();
         ArrayList<Node>  nodes1 = searchNode(graph, s1, numSearch);
         ArrayList<Node>  nodes2 = searchNode(graph, s2, numSearch);
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
@@ -63,17 +61,18 @@ public class API {
 
     // create graph
     public static Graph createGraph() {
-    	// parse data
-    	System.out.println(".... Parsing Data ....");
-        ArrayList<Node> nodes = DataParser.parseNodes("data/wiki-topcats-page-names.txt", "data/wiki-topcats-categories.txt");
-        // ArrayList<Pair<String, ArrayList<Integer>>> categories = DataParser.parseCategories("data/wiki-topcats-categories.txt");
-        ArrayList<Integer[]> connnections = DataParser.parseConnections("data/wiki-topcats.txt");
+        // parse data
+        Instant start = Instant.now();
+    	System.out.println(".... Parsing Nodes ....");
+        ArrayList<Node> nodes = DataParser.parseNodes("classpath:data/wiki-topcats-page-names.txt", "classpath:data/wiki-topcats-categories.txt");
+        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
 
-        //build graph
-        System.out.println(".... Building Graph ....");
+        // build graph
+        start = Instant.now();
+        System.out.println(".... Parsing Connections/Building Graph ....");
         Graph graph = new Graph(nodes);
-        for (Integer[] pairs : connnections)
-            graph.addEdge(pairs[0], pairs[1]);
+        DataParser.parseConnections("classpath:data/wiki-topcats.txt", graph);
+        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
 
         return graph;
     }

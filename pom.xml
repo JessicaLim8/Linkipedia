@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.linkipedia</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>linkipedia</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>linkipedia</name>
 	<description>linkipedia</description>
