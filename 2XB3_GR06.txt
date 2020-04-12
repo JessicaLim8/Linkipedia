@@ -11,6 +11,7 @@ April 12 2020
 Please look at README.md for instructions on how to deploy the application
 
 Design documents and Requirements documents are found in docs folder
+Meeting minutes are in minutes file
 Data must be in data folder (more details in README.md)
 
 The repository is at https://github.com/JessicaLim8/Linkipedia
