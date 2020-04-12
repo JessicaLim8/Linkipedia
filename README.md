@@ -4,21 +4,23 @@ Final Project for Software Engineering 2XB3, Software Engineering Practice and E
 
 Creators: Maanav Dalal, Pranay Kotian, Jessica Lim, Jay Mody
 
-## Setup / Deploy
+## Setup Via Eclipse
+Import the project given an eclipse archive zip file:
+- In Eclipse, click **File > Import**.
+- Choose **General > Existing Projects into Workspace**.
+- Choose **Select archive file:** and select the given eclipse archive zip file. Click Finish.
+- The project should now be imported into eclipse.
 
-For the project, there are two different methods of deployment:
+Run the unit tests:
+- Right-click the project in package explore.
+- Select **Run As > Maven Test**
+- The console should appear that will load the dependencies and run the test cases.
 
-### 1. Via Eclipse
-- In Eclipse, click **File > Open Projects From File System...**
-- Choose **Archive** for the import source, and select the archived version of the project.
-- Confirm that the linkipedia folder appears below, and select the internal folder 'linkipedia', then click **Finish**.
-- Select Right-click the linkipedia project in the project explorer tab, and choose **Run As > Run Configurations...**
-- Choose **Maven Build** on the left sidebar, press new configuration, and under the goals field, type **spring-boot:run**. 
-- Ensure that your base directory is the project location. If not, select **Workspace > linkipedia**.
-- Select **Run**.
-- Access the deployment on https://localhost:8080
-
-### 2. Via Script (Unix)
-- Open the directory in your terminal
-- Type `./mvnw spring-boot:run`
-- Access the deployment on https://localhost:8080
+Run the application:
+- Right-click the project in package explore.
+- Select **Run As > Maven Build**
+- Under Goals, input `spring-boot:run`.
+- Click **Apply** and then click **Run**.
+- A console should load the dependencies and deploy the web app.
+- Deploying the web application will take anywhere between 1-8 minutes (has to parse over 29 million lines of data). Likely, you'll see `... Parsing Nodes ...` or `... Parsing Connections/Building Graph ...` in the console. The webapp will deploy shortly after the above two lines are passed.
+- Access the app in your favourite internet browser (e.g. Chrome) at https://localhost:8080
