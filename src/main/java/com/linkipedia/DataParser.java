@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.springframework.util.ResourceUtils;
+
 public class DataParser {
 	public static ArrayList<Node> parseNodes(String nodeFile, String catFile) {
 		ArrayList<Node> nodeList = new ArrayList<Node>();
@@ -12,7 +14,7 @@ public class DataParser {
 
 		try {
 			// read from input file
-			Scanner input = new Scanner(new File(nodeFile));
+			Scanner input = new Scanner(ResourceUtils.getFile(nodeFile));
 			while (input.hasNext()) {
 				String curr = input.nextLine();
 				// split text into int and string
@@ -28,8 +30,8 @@ public class DataParser {
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		ArrayList<Pair<String, ArrayList<Integer>>> categories = parseCategories(catFile);
-		setCategories(nodeList, categories);
+		// ArrayList<Pair<String, ArrayList<Integer>>> categories = parseCategories(catFile);
+		// setCategories(nodeList, categories);
 		return nodeList;
 	}
 
@@ -39,7 +41,7 @@ public class DataParser {
 
 		try {
 			// read from input file
-			Scanner input = new Scanner(new File(catFile));
+			Scanner input = new Scanner(ResourceUtils.getFile(catFile));
 			while (input.hasNext()) {
 				String curr = input.nextLine();
 				// split text into category name and vertices list
@@ -68,25 +70,26 @@ public class DataParser {
 
 	}
 
-	public static ArrayList<Integer[]> parseConnections(String connectFile) {
-		ArrayList<Integer[]> connectList = new ArrayList<Integer[]>();
-
+	public static void parseConnections(String connectFile, Graph graph) {
 		try {
 			// read from input file
-			Scanner input = new Scanner(new File(connectFile));
+			Scanner input = new Scanner(ResourceUtils.getFile(connectFile));
 			while (input.hasNext()) {
-				String curr = input.nextLine();
-				// split text into int and string
-				String[] elements = curr.split(" ");
-				Integer[] tempList = {Integer.parseInt(elements[0]), Integer.parseInt(elements[1])};
-				connectList.add(tempList);
+                String curr = input.nextLine();
+
+                int i = 0;
+                while (curr.charAt(i) != ' ')
+                    i++;
+                graph.addEdge(
+                    Integer.parseInt(curr.substring(0, i)),
+                    Integer.parseInt(curr.substring(i+1, curr.length()))
+                );
 			};
 			input.close();
 		}
 		catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		return connectList;
 	}
 
 	private static void setCategories(ArrayList<Node> nodes, ArrayList<Pair<String, ArrayList<Integer>>> categories) {
