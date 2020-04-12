@@ -67,17 +67,11 @@ public class API {
         ArrayList<Node> nodes = DataParser.parseNodes("classpath:data/wiki-topcats-page-names.txt", "classpath:data/wiki-topcats-categories.txt");
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
 
-        start = Instant.now();
-        System.out.println(".... Parsing Connections ....");
-        ArrayList<Integer[]> connnections = DataParser.parseConnections("classpath:data/wiki-topcats.txt");
-        System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
-
         // build graph
         start = Instant.now();
-        System.out.println(".... Building Graph ....");
+        System.out.println(".... Parsing Connections/Building Graph ....");
         Graph graph = new Graph(nodes);
-        for (Integer[] pairs : connnections)
-            graph.addEdge(pairs[0], pairs[1]);
+        DataParser.parseConnections("classpath:data/wiki-topcats.txt", graph);
         System.out.println("Time taken: "+ Duration.between(start, Instant.now()).toMillis() +" milliseconds \n");
 
         return graph;
