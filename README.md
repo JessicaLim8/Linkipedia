@@ -1,8 +1,9 @@
 # Linkipedia
+Creators: Maanav Dalal, Pranay Kotian, Jessica Lim, Jay Mody
+
+Find various connections between multiple wikipedia topics!
 
 Final Project for Software Engineering 2XB3, Software Engineering Practice and Experience: Binding Theory to Practice.
-
-Creators: Maanav Dalal, Pranay Kotian, Jessica Lim, Jay Mody
 
 ## Setup Via Eclipse
 Import the project given an eclipse archive zip file:
